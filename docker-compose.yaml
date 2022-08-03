@@ -13,7 +13,7 @@ services:
       replicas: 2
 
   frontend:
-    image: jamalh8/spring-petclinic-angular:latest
+    image: jdibs74836/spring-petclinic-angular:latest
     build: ./spring-petclinic-angular
     # container_name: frontend
     networks:
