@@ -13,7 +13,7 @@ pipeline {
             }
         stage('Ansible') {
             steps {
-                git branch: 'dev', url: 'https://github.com/QAFinalProject/petclinic.git'
+                git branch: 'dev-env', url: 'https://github.com/QAFinalProject/petclinic.git'
                 sh 'ansible-playbook -i $WORKSPACE/ansible/inventory.yaml $WORKSPACE/ansible/playbook.yaml'
                 }
             }
@@ -28,12 +28,12 @@ pipeline {
             }
         stage('Deploy App') {
             steps {
-                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@3.8.22.208  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'
+                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@13.40.110.119  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'
                 }
             }
         stage('Deploy nginx') {
             steps {
-                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@3.8.84.65 ./nginx-lb-script.sh'
+                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@18.133.138.190 ./nginx-lb-script.sh'
             }
         }
     }

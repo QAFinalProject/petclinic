@@ -120,7 +120,7 @@ resource "aws_instance" "swarm-manager-dev" {
   ami                    = local.imageid
   instance_type          = var.small
   key_name               = var.sshkeypairname
-  vpc_security_group_ids = [aws_security_group.app.id]
+  vpc_security_group_ids = [aws_security_group.app-dev.id]
   user_data              = <<EOF
 #cloud-config
 EOF
@@ -137,7 +137,7 @@ resource "aws_instance" "nginx-dev" {
   ami                    = local.imageid
   instance_type          = var.micro
   key_name               = var.sshkeypairname
-  vpc_security_group_ids = [aws_security_group.nginx.id]
+  vpc_security_group_ids = [aws_security_group.nginx-dev.id]
   user_data              = <<EOF
 #cloud-config
 EOF
@@ -154,7 +154,7 @@ resource "aws_instance" "swarm-worker-dev" {
   ami                    = local.imageid
   instance_type          = var.small
   key_name               = var.sshkeypairname
-  vpc_security_group_ids = [aws_security_group.app.id]
+  vpc_security_group_ids = [aws_security_group.app-dev.id]
   user_data              = <<EOF
 #cloud-config
 EOF
