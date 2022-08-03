@@ -2,7 +2,6 @@ version: "3.8"
 services:
   backend:
     image: springcommunity/spring-petclinic-rest
-    # continer_name: backend
     networks:
       - petclinic-net
     ports: 
@@ -13,9 +12,8 @@ services:
       replicas: 2
 
   frontend:
-    image: jamalh8/spring-petclinic-angular:latest
+    image: jamalh8/spring-petclinic-angular:dev
     build: ./spring-petclinic-angular
-    # container_name: frontend
     networks:
       - petclinic-net
     deploy:
@@ -26,25 +24,8 @@ services:
         protocol: tcp
     depends_on:
       - backend
-
-  # nginx:
-  #   image: nginx:latest
-  #   # container_name: nginx
-  #   networks:
-  #     - petclinic-net
-  #   volumes:
-  #     - type: bind
-  #       source: /home/ubuntu/nginx.conf
-  #       target: /etc/nginx/nginx.conf
-  #   ports:
-  #     - target: 80
-  #       published: 80
-  #       protocol: tcp
-  #   depends_on:
-  #     - backend
-
 networks:
   petclinic-net:
-    # driver: overlay
+
 
     
