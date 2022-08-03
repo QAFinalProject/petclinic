@@ -8,11 +8,10 @@ pipeline {
         DOCKER_HUB_CREDS_PSW = credentials('DOCKER_HUB_PSW')
     }
     stages {
-            stages {
-                stage('Clean up WS') {
+            stage('Clean up WS') {
                 steps {
-                // Clean before build
-                cleanWs()
+                    // Clean before build
+                    cleanWs()
             }
         }
     }
