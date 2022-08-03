@@ -15,7 +15,7 @@ pipeline {
             stage('Ansible') {
                 steps {
 
-                    sh 'ansible-playbook -i ~/.jenkins/workspace/petclinic/ansible/inventory.yaml ~/.jenkins/workspace/petclinic/ansible/playbook.yaml'
+                    sh 'ansible-playbook -i ~/.jenkins/workspace/petclinic-ansible/ansible/inventory.yaml ~/.jenkins/workspace/petclinic-ansible/ansible/playbook.yaml'
             }
         }
         stage('Build Image') {

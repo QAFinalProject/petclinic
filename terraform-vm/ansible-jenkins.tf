@@ -7,6 +7,11 @@ pipeline {
         DOCKER_HUB_CREDS_USR = credentials('DOCKER_HUB_USR')
         DOCKER_HUB_CREDS_PSW = credentials('DOCKER_HUB_PSW')
     }
+        stages {
+            stage('Clean workspace') {
+                cleanWs()
+            }
+        }
     stages {
             stage('Terraform') {
                 steps {
