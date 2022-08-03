@@ -8,7 +8,8 @@ pipeline {
             stage('Terraform') {
                 steps {
                     git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
-                    sh 'cd terraform-vm && terraform apply -auto-approve'
+                    sh '''cd terraform-vm && terraform init
+                    cd terraform vm && terraform apply -auto-approve'''
             }
         }
             stage('Ansible') {
