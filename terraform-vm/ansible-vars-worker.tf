@@ -9,5 +9,5 @@ resource "local_file" "tf_ansible_vars_file_worker" {
     remote_addrs: [ '${aws_instance.swarm-manager.public_ip}:2377' ]
 
     DOC
-  filename = "/home/jenkins/.jenkins/workspace/petclinic-terraform/main.yaml"
+  filename = "../ansible/roles/swarm-worker/tasks/main.yaml"
 }

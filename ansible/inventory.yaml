@@ -1,0 +1,16 @@
+all:
+  children:
+    manager:
+      hosts:
+        3.10.164.242:
+    worker:
+      hosts:
+        18.170.91.128:
+    nginx-lb:
+      hosts:
+        18.132.211.7:
+
+  vars:
+    ansible_user: ubuntu
+    ansible_ssh_private_key_file: '~/.ssh/aws-key-london.pem'
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'

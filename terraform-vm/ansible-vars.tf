@@ -18,5 +18,5 @@ all:
     ansible_ssh_private_key_file: '~/.ssh/aws-key-london.pem'
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
     DOC
-  filename = "/home/jenkins/.jenkins/workspace/petclinic-terraform/inventory.yaml"
+  filename = "../ansible/inventory.yaml"
 }
