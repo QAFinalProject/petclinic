@@ -1,0 +1,16 @@
+---
+# tasks file for swarm-manager
+- name: copy docker-compose file over
+  copy:
+    src: /home/ubuntu/petclinic/docker-compose-dev.yaml
+    dest: /home/ubuntu/
+
+- name: Initialise swarm on manager
+  docker_swarm:
+    state: present
+
+- name: get token info
+  docker_swarm_info:
+  register: swarm_info
+
+

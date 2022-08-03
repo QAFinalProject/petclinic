@@ -17,7 +17,7 @@ pipeline {
         stage('Ansible') {
             steps {
                 git branch: 'dev-env', url: 'https://github.com/QAFinalProject/petclinic.git'
-                sh 'ansible-playbook -i $WORKSPACE/ansible/inventory.yaml $WORKSPACE/ansible/playbook.yaml'
+                sh 'ansible-playbook -i $WORKSPACE/ansible-dev/inventory.yaml $WORKSPACE/ansible-dev/playbook.yaml'
                 }
             }
         stage('Build Image') {
