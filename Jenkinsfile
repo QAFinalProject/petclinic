@@ -28,8 +28,7 @@ pipeline {
         }
             stage('Deploy App') {
                 steps {
-                    sh '''scp -i ~/.ssh/aws-key-london.pem /home/ubuntu/petclinic/docker-compose.yaml ubuntu@3.10.164.242 :/home/ubuntu/
-                    ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@3.10.164.242  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'''
+                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@3.10.164.242  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'''
             }
         }
             stage('Deploy nginx') {
