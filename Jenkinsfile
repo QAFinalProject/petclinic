@@ -14,7 +14,6 @@ pipeline {
                 echo "Building ${env.JOB_NAME}..."
             }
         }
-    }
             stage('Terraform') {
                 steps {
                     git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
