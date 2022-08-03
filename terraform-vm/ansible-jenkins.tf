@@ -45,6 +45,7 @@ pipeline {
         }
     }
 }
+}
 
     DOC
   filename = "../Jenkinsfile"
