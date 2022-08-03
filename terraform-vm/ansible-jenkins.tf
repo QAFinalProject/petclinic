@@ -25,7 +25,7 @@ pipeline {
         }
             stage('Deploy App') {
                 steps {
-                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@${aws_instance.swarm-manager.public_ip}  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'''
+                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@${aws_instance.swarm-manager.public_ip}  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'
             }
         }
             stage('Deploy nginx') {

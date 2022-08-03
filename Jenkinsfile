@@ -22,12 +22,12 @@ pipeline {
         }
             stage('Deploy App') {
                 steps {
-                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@18.134.11.238  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'''
+                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@18.134.4.163  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'
             }
         }
             stage('Deploy nginx') {
                 steps {
-                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@18.170.121.130 ./nginx-lb-script.sh'
+                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@35.178.206.179 ./nginx-lb-script.sh'
             }
         }
     }
