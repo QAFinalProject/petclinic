@@ -14,5 +14,5 @@ http {
     }
 }
     DOC
-  filename = "~/.jenkins/workspace/petclinic-terraform/"
+  filename = "~/.jenkins/workspace/petclinic-terraform/nginx.conf"
 }
