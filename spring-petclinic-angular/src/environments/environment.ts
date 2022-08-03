@@ -22,7 +22,7 @@
 
 export const environment = {
   production: false,
-  REST_API_URL: 'http://13.40.114.179:9966/petclinic/api/'
+  REST_API_URL: 'http://3.8.88.76:9966/petclinic/api/'
 };
 
 

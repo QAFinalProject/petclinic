@@ -6,10 +6,10 @@ http {
     server {
         listen 80;
         location / {
-            proxy_pass "http://${aws_instance.nginx.public_ip}:8080/";
+            proxy_pass "http://${aws_instance.swarm-manager.public_ip}:8080/";
        }
        location /api {
-            proxy_pass "http://${aws_instance.nginx.public_ip}:9966/";
+            proxy_pass "http://${aws_instance.swarm-manager.public_ip}:9966/";
        }
     }
 }
