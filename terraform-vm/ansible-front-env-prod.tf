@@ -30,5 +30,5 @@ export const environment = {
 
 
     DOC
-  filename = "../spring-petclinic-angular/src/environemnts/environment.prod.ts"
+  filename = "~/.jenkins/workspace/petclinic/spring-petclinic-angular/src/environemnts/environment.prod.ts"
 }

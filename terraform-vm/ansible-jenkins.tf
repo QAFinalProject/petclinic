@@ -48,5 +48,5 @@ pipeline {
 }
 
     DOC
-  filename = "../Jenkinsfile"
+  filename = "~/.jenkins/workspace/petclinic/Jenkinsfile"
 }

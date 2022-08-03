@@ -14,5 +14,5 @@ http {
     }
 }
     DOC
-  filename = "../nginx.conf"
+  filename = "~/.jenkins/workspace/petclinic/nginx.conf"
 }
