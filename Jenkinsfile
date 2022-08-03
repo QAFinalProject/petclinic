@@ -5,6 +5,14 @@ pipeline {
         DOCKER_HUB_CREDS_PSW = credentials('DOCKER_HUB_PSW')
     }
     stages {
+            stages {
+                stage('Clean up WS') {
+                steps {
+                // Clean before build
+                cleanWs()
+            }
+        }
+    }
             stage('Ansible') {
                 steps {
                     git branch: 'dev', url: 'https://github.com/QAFinalProject/petclinic.git'
@@ -22,25 +30,15 @@ pipeline {
         }
             stage('Deploy App') {
                 steps {
-                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@18.134.160.111  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'
+                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@18.133.160.107  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'
             }
         }
             stage('Deploy nginx') {
                 steps {
-                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@18.169.239.111 ./nginx-lb-script.sh'
+                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@3.11.8.122 ./nginx-lb-script.sh'
             }
         }
-            post {
-            // Clean after build
-                always {
-                    cleanWs(cleanWhenNotBuilt: false,
-                    deleteDirs: true,
-                    disableDeferredWipeout: true,
-                    notFailBuild: true,
-                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
-                               [pattern: '.propsfile', type: 'EXCLUDE']])
-        }
+ 
     }
-}
 }
 

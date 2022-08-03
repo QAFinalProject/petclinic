@@ -8,6 +8,14 @@ pipeline {
         DOCKER_HUB_CREDS_PSW = credentials('DOCKER_HUB_PSW')
     }
     stages {
+            stages {
+                stage('Clean up WS') {
+                steps {
+                // Clean before build
+                cleanWs()
+            }
+        }
+    }
             stage('Ansible') {
                 steps {
                     git branch: 'dev', url: 'https://github.com/QAFinalProject/petclinic.git'
@@ -33,18 +41,8 @@ pipeline {
                     sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@${aws_instance.nginx.public_ip} ./nginx-lb-script.sh'
             }
         }
-            post {
-            // Clean after build
-                always {
-                    cleanWs(cleanWhenNotBuilt: false,
-                    deleteDirs: true,
-                    disableDeferredWipeout: true,
-                    notFailBuild: true,
-                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
-                               [pattern: '.propsfile', type: 'EXCLUDE']])
-        }
+ 
     }
-}
 }
 
     DOC
