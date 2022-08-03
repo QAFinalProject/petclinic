@@ -21,19 +21,19 @@ pipeline {
             steps {
                 sh '''sudo docker image prune
                 sudo docker system prune --all --volumes --force
-                sudo docker-compose build
+                sudo docker-compose -f docker-compose-dev.yaml build
                 sudo docker login --username $DOCKER_HUB_CREDS_USR --password $DOCKER_HUB_CREDS_PSW
-                sudo docker-compose push'''
+                sudo docker-compose -f docker-compose-dev.yaml push'''
                 }
             }
         stage('Deploy App') {
             steps {
-                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@13.40.110.119  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'
+                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@13.40.34.160  sudo docker stack deploy --compose-file docker-compose-dev.yaml petclinic-stack'
                 }
             }
         stage('Deploy nginx') {
             steps {
-                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@18.133.138.190 ./nginx-lb-script.sh'
+                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@3.10.119.255 ./nginx-lb-script.sh'
             }
         }
     }
