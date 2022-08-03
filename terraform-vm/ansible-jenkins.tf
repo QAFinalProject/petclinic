@@ -17,13 +17,11 @@ pipeline {
         }
             stage('Ansible') {
                 steps {
-                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
                     sh 'ansible-playbook -i ~/.jenkins/workspace/petclinic-terraform/ansible/inventory.yaml ~/.jenkins/workspace/petclinic-terraform/ansible/playbook.yaml'
             }
         }
         stage('Build Image') {
             steps {
-                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
                     sh '''sudo docker image prune
                     sudo docker system prune --all --volumes --force
                     sudo docker-compose build
@@ -33,14 +31,12 @@ pipeline {
         }
             stage('Deploy App') {
                 steps {
-                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
                     sh '''scp -i ~/.ssh/aws-key-london.pem /home/ubuntu/petclinic/docker-compose.yaml ubuntu@${aws_instance.swarm-manager.public_ip} :/home/ubuntu/
                     ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@${aws_instance.swarm-manager.public_ip}  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'''
             }
         }
             stage('Deploy nginx') {
                 steps {
-                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
                     sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@${aws_instance.nginx.public_ip} ./nginx-lb-script.sh'
             }
         }
