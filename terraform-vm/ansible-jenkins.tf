@@ -8,15 +8,9 @@ pipeline {
         DOCKER_HUB_CREDS_PSW = credentials('DOCKER_HUB_PSW')
     }
     stages {
-            stage('Terraform') {
-                steps {
-                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
-                    sh '''cd terraform-vm && terraform init
-                    terraform apply -auto-approve'''
-            }
-        }
             stage('Ansible') {
                 steps {
+                    git branch: 'dev', url: 'https://github.com/QAFinalProject/petclinic.git'
                     sh 'ansible-playbook -i $WORKSPACE/ansible/inventory.yaml $WORKSPACE/ansible/playbook.yaml'
             }
         }
