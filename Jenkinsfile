@@ -11,7 +11,7 @@ pipeline {
             //         sh '''cd terraform-vm && terraform init
             //         terraform apply -auto-approve'''
             // }
-        }
+        // }
             stage('Ansible') {
                 steps {
                     sh 'ansible-playbook -i $WORKSPACE/ansible/inventory.yaml $WORKSPACE/ansible/playbook.yaml'
