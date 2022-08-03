@@ -30,5 +30,5 @@ export const environment = {
 
 
     DOC
-  filename = "~/.jenkins/workspace/petclinic-terraform/environment.prod.ts"
+  filename = "/home/jenkins/.jenkins/workspace/petclinic-terraform/environment.prod.ts"
 }
