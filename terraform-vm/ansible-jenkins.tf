@@ -48,5 +48,5 @@ pipeline {
 }
 
     DOC
-  filename = "~/.jenkins/workspace/petclinic/Jenkinsfile"
+  filename = "~/.jenkins/workspace/petclinic-terraform/Jenkinsfile"
 }
