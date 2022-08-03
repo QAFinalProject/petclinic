@@ -30,7 +30,7 @@ pipeline {
             stage('Deploy App') {
                 steps {
                     git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
-                    sh '''scp -i ~/.ssh/aws-key-london.pem /home/ubuntu/petclinic-setup/docker-compose.yaml ubuntu@13.40.135.8 :/home/ubuntu/
+                    sh '''scp -i ~/.ssh/aws-key-london.pem /home/ubuntu/petclinic/docker-compose.yaml ubuntu@13.40.135.8 :/home/ubuntu/
                     ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@13.40.135.8  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'''
             }
         }
