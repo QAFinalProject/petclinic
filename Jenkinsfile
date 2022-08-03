@@ -5,47 +5,38 @@ pipeline {
         DOCKER_HUB_CREDS_PSW = credentials('DOCKER_HUB_PSW')
     }
     stages {
+            stage('Terraform') {
+                steps {
+                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
+                    sh 'cd terraform-vm && terraform apply -auto-approve'
+            }
+        }
             stage('Ansible') {
                 steps {
-                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic-setup.git'
+                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
                     sh 'ansible-playbook -i ~/.jenkins/workspace/petclinic/ansible/inventory.yaml ~/.jenkins/workspace/petclinic/ansible/playbook.yaml'
             }
         }
-        // stage('Clone down functional files') {
-        //     steps {
-        //         git branch: 'main', url: 'https://github.com/QAFinalProject/spring-petclinic.git'
-        //         sh 'sudo apt update'
-        //         sh 'scp -i ~/.ssh/aws-key-london.pem /home/ubuntu/spring-petclinic/docker-check-script.sh ubuntu@3.10.246.212:/home/ubuntu/'   
-        //     }
-        // } 
-
-        // stage('Deploy backend') {
-        //     steps {              
-        //         git 'https://github.com/QAFinalProject/spring-petclinic-rest.git'
-        //         sh '''ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@3.10.246.212 sudo chmod +x docker-check-script.sh
-        //         ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@3.10.246.212 ./docker-check-script.sh'''
-        //     }
-        // }
-        // stage('Deploy frontend') {
-        //     steps {
-        //         git branch: 'master', url: 'https://github.com/QAFinalProject/spring-petclinic-angular.git'
-        //         sh '''sudo docker image prune
-        //         sudo docker system prune --all --volumes --force
-        //         sudo docker build -t jamalh8/spring-petclinic-angular:latest .
-        //         sudo docker login --username $DOCKER_HUB_CREDS_USR --password $DOCKER_HUB_CREDS_PSW
-        //         sudo docker push jamalh8/spring-petclinic-angular:latest
-        //         ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@3.10.246.212 sudo docker run --rm -d --name frontend -p 8080:8080 jamalh8/spring-petclinic-angular:latest'''
-        //     }
-        // }
-            stage('Deploy frontend') {
+        stage('Build Image') {
+            steps {
+                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
+                    sh '''sudo docker image prune
+                    sudo docker system prune --all --volumes --force
+                    sudo docker-compose build
+                    sudo docker login --username $DOCKER_HUB_CREDS_USR --password $DOCKER_HUB_CREDS_PSW
+                    sudo docker-compose push'''
+            }
+        }
+            stage('Deploy App') {
                 steps {
-                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic-setup.git'
-                    sh '''scp -i ~/.ssh/aws-key-london.pem /home/ubuntu/petclinic-setup/docker-compose.yaml ubuntu@3.8.89.70:/home/ubuntu/
-                    ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@3.8.89.70 sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'''
+                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
+                    sh '''scp -i ~/.ssh/aws-key-london.pem /home/ubuntu/petclinic-setup/docker-compose.yaml ubuntu@13.40.135.8 :/home/ubuntu/
+                    ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@13.40.135.8  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'''
             }
         }
             stage('Deploy nginx') {
                 steps {
+                    git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
                 sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@13.40.113.81 ./nginx-lb-script.sh'
             }
         }
