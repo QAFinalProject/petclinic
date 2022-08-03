@@ -37,7 +37,7 @@ pipeline {
             stage('Deploy nginx') {
                 steps {
                     git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
-                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@13.40.113.81 ./nginx-lb-script.sh'
+                    sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@13.40.113.81 ./nginx-lb-script.sh'
             }
         }
     }
