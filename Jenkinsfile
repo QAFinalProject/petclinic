@@ -5,6 +5,16 @@ pipeline {
         DOCKER_HUB_CREDS_PSW = credentials('DOCKER_HUB_PSW')
     }
     stages {
+            stage('Clean WS') {
+                steps {
+                // Clean before build
+                cleanWs()
+                // We need to explicitly checkout from SCM here
+                checkout scm
+                echo "Building ${env.JOB_NAME}..."
+            }
+        }
+    }
             stage('Terraform') {
                 steps {
                     git branch: 'main', url: 'https://github.com/QAFinalProject/petclinic.git'
