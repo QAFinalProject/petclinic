@@ -28,12 +28,12 @@ pipeline {
             }
         stage('Deploy App') {
             steps {
-                sh 'ssh -i /home/jenkins/.ssh/amz-key-pair.pem ubuntu@3.8.85.132  sudo docker stack deploy --compose-file docker-compose-dev.yaml petclinic-stack'
+                sh 'ssh -i /home/jenkins/.ssh/amz-key-pair.pem ubuntu@52.56.52.186  sudo docker stack deploy --compose-file docker-compose-dev.yaml petclinic-stack'
                 }
             }
         stage('Deploy nginx') {
             steps {
-                sh 'ssh -i /home/jenkins/.ssh/amz-key-pair.pem ubuntu@18.169.186.143 ./nginx-lb-script.sh'
+                sh 'ssh -i /home/jenkins/.ssh/amz-key-pair.pem ubuntu@18.134.99.178 ./nginx-lb-script.sh'
             }
         }
     }
