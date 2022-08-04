@@ -13,27 +13,27 @@ pipeline {
             }
         stage('Ansible') {
             steps {
-                git branch: 'dev-env', url: 'https://github.com/QAFinalProject/petclinic.git'
-                sh 'ansible-playbook -i $WORKSPACE/ansible-dev/inventory.yaml $WORKSPACE/ansible-dev/playbook.yaml'
+                git branch: 'prod-env', url: 'https://github.com/QAFinalProject/petclinic.git'
+                sh 'ansible-playbook -i $WORKSPACE/ansible/inventory.yaml $WORKSPACE/ansible/playbook.yaml'
                 }
             }
         stage('Build Image') {
             steps {
                 sh '''sudo docker image prune
                 sudo docker system prune --all --volumes --force
-                sudo docker-compose -f docker-compose-dev.yaml build
+                sudo docker-compose build
                 sudo docker login --username $DOCKER_HUB_CREDS_USR --password $DOCKER_HUB_CREDS_PSW
-                sudo docker-compose -f docker-compose-dev.yaml push'''
+                sudo docker-compose push'''
                 }
             }
         stage('Deploy App') {
             steps {
-                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@13.40.145.172  sudo docker stack deploy --compose-file docker-compose-dev.yaml petclinic-stack'
+                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@13.40.11.186  sudo docker stack deploy --compose-file docker-compose.yaml petclinic-stack'
                 }
             }
         stage('Deploy nginx') {
             steps {
-                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@18.170.67.175 ./nginx-lb-script.sh'
+                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@13.40.37.19 ./nginx-lb-script.sh'
             }
         }
     }
