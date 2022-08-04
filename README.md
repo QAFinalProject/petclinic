@@ -24,7 +24,7 @@ This will automatically update the IP addresses for Ansible, Jenkins Pipeline, N
 
 #### Step 2
 
-- change directory to main petclinic
+- change directory to petclinic/
 - git add *
 - git commit -m "your message"
 - git push
