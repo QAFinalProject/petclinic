@@ -31,12 +31,12 @@ pipeline {
             }
         stage('Deploy App') {
             steps {
-                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@${aws_instance.swarm-manager-dev.public_ip}  sudo docker stack deploy --compose-file docker-compose-dev.yaml petclinic-stack'
+                sh 'ssh -i /home/jenkins/.ssh/amz-key-pair.pem ubuntu@${aws_instance.swarm-manager-dev.public_ip}  sudo docker stack deploy --compose-file docker-compose-dev.yaml petclinic-stack'
                 }
             }
         stage('Deploy nginx') {
             steps {
-                sh 'ssh -i /home/jenkins/.ssh/aws-key-london.pem ubuntu@${aws_instance.nginx-dev.public_ip} ./nginx-lb-script.sh'
+                sh 'ssh -i /home/jenkins/.ssh/amz-key-pair.pem ubuntu@${aws_instance.nginx-dev.public_ip} ./nginx-lb-script.sh'
             }
         }
     }

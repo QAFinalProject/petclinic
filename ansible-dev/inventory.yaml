@@ -2,15 +2,15 @@ all:
   children:
     manager:
       hosts:
-        18.130.155.106:
+        18.170.57.167:
     worker:
       hosts:
-        35.179.15.250:
+        18.133.73.65:
     nginx-lb:
       hosts:
-        18.169.243.114:
+        18.130.59.60:
 
   vars:
     ansible_user: ubuntu
-    ansible_ssh_private_key_file: '~/.ssh/aws-key-london.pem'
+    ansible_ssh_private_key_file: '~/.ssh/amz-key-pair.pem'
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'

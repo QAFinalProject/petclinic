@@ -15,7 +15,7 @@ all:
 
   vars:
     ansible_user: ubuntu
-    ansible_ssh_private_key_file: '~/.ssh/aws-key-london.pem'
+    ansible_ssh_private_key_file: '~/.ssh/amz-key-pair.pem'
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
     DOC
   filename = "../ansible-dev/inventory.yaml"
