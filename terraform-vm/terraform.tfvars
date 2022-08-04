@@ -1,1 +1,0 @@
-sshkeypairname    = "aws-key-london"
