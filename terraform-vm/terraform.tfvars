@@ -1,1 +1,1 @@
-sshkeypairname    = "aws-key-london"
+sshkeypairname    = "amz-key-pair"
