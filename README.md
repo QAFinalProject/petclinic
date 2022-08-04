@@ -8,7 +8,7 @@ App Back End - [Spring-Petclinic-Rest](https://github.com/spring-petclinic/sprin
 
 ## Production
 
-FOR DEVELOPMENT - PLEASE USE 'dev-env' BRNACH!
+FOR DEVELOPMENT - PLEASE USE 'dev-env' BRANCH!
 
 ### Set-up
 
