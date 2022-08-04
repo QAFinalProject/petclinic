@@ -14,9 +14,9 @@ FOR PRODUCTION - PLEASE USE 'prod-env' BRANCH!
 
 #### Step 1
 
-Update your aws key in terraform-vm/terraform.tfvars.
+Update your aws key in terraform-vm-dev/terraform.tfvars.
 
-Run following commands in terraform-vm folder.
+Run following commands in terraform-vm-dev folder.
 
 - Terraform init
 - Terraform plan
